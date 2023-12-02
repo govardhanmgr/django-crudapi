@@ -16,9 +16,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from posts.views import PostViewSet,PostModelViewSet
+
+
+
+router = DefaultRouter()
+router.register("",PostViewSet,"posts")
+model_router=DefaultRouter()
+model_router.register("",PostModelViewSet,"posts-model-viewset")
+
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('posts/', include('posts.urls')),
+    path('post-viewsets/',include(router.urls)),
+    path('post-model-viewsets/',include(model_router.urls)),
+    path('auth/',include('accounts.urls')),
+
     
 ]

@@ -185,4 +185,21 @@ class PostViewSet(viewsets.ViewSet):
         queryset= Post.objects.all()
         serializer = PostSerializer(instance=queryset,many=True)
         return Response(data=serializer.data,status=status.HTTP_200_OK)
+    
+    def retrieve(self,request:Request,pk=None):
+        post = get_object_or_404(Post,pk=pk)
+        serializer= PostSerializer(instance=post)
+        return Response(data=serializer.data,status=status.HTTP_200_OK)
         
+    def create(self,request:Request):
+        data= request.data
+        serializer = PostSerializer(data=data)  
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data=serializer.data)
+        
+
+class PostModelViewSet(viewsets.ModelViewSet):
+    queryset=Post.objects.all()
+    serializer_class=PostSerializer
+    

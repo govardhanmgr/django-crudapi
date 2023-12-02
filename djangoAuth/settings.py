@@ -39,11 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'classicAuth',
     'posts',
+    'accounts',
 
 
     #third party apps
     'rest_framework'
 ]
+
+# ACCOUNT_AUTHENTICATION_METHOD ="email"
+AUTH_USER_MODEL="accounts.User"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
